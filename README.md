@@ -1,0 +1,1 @@
+This is an HTML5 Canvas animation/visualization programmed in JS.  It uses a prototypes and a MVC style approach.  All visualizations are variations of a spiral.  I use multiple "artboards" to allow spirals to be overlapped and rotated.  
