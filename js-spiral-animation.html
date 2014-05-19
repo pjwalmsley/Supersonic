@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<canvas id="myCanvas" width="800" height="600"></canvas>
+		<audio src="supersonic.mp3" id="audio" preload controls autoplay></audio>
+		<script src="jquery-2.0.3.min.js"></script>
+		<script src="requestAnimFrame.js"></script>
+		<script src="Spiral.js"></script>
+		<script src="SpiralCluster.js"></script>
+		<script src="ArtBoard.js"></script>
+		<script src="MusicManager.js"></script>
+		<script src="EventManager.js"></script>
+		<script src="Render.js"></script>
+		<script>
+            var canvas = document.getElementById("myCanvas");
+            canvas.style.border = "1px solid #000";
+            var context = canvas.getContext('2d');
+            var window = document.window;
+
+            // model
+            var musicManager = new MusicManager(canvas, context);
+            var primaryAB = new ArtBoard(canvas, context, musicManager);
+			// library
+            var eventManager = new EventManager(primaryAB);
+            // controller
+            var render = new Render(canvas, context, primaryAB, musicManager);
+            //view
+            //var sp = new Spiral(canvas, context);
+
+            animationLoop();
+
+            function animationLoop() {
+                context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                requestAnimFrame(animationLoop, 1000 / 60);
+                render.renderCurrentFrame();
+                //sp.draw();
+            }
+		</script>
+		<style>
+			body {
+				margin: 0px auto;
+				overflow: hidden;
+			}
+		</style>
+	</body>
+</html>
